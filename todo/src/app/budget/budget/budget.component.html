@@ -1,0 +1,82 @@
+<html>
+
+<head>
+</head>
+
+<body>
+  <div class="container">
+    <div class="budget__title">
+      Available Budget in {{displayMonth()}}:
+    </div>
+
+    <div class="budget__value">{{getAvailableBudget()}}</div>
+    <br><br>
+  </div>
+  <div class="jumbotron jumbotron-fluid">
+      <div class="alert alert-warning" *ngIf="addExpenseForm.dirty && addExpenseForm.invalid">Enter Valid Input</div>
+      <div class="alert alert-warning" *ngIf="addExpenseForm.dirty && description.invalid">Enter Valid Description at least 5 charchters</div>
+      <div class="alert alert-warning" *ngIf="addExpenseForm.dirty && amount.invalid">Enter Valid Amount</div>
+      <div class="alert alert-warning" *ngIf="addExpenseForm.dirty && date.invalid">Enter Valid Date</div>
+      <div class="alert alert-warning" *ngIf="addExpenseForm.dirty && type.invalid">Select Valid Type</div>
+    <div class="container">
+      <form (ngSubmit)="!addExpenseForm.invalid && saveExpense()" #addExpenseForm="ngForm">
+          <div class="form-group">
+              <label for="type">Choose Type</label>
+          <select class="form-control" class="form-control" [(ngModel)]="expense.type" name="type" required="required" #type="ngModel">
+              <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+            </select>
+          </div>
+
+        <div class="form-group">
+          <label for="desc">Expense Description</label>
+          <input type="text" class="form-control" id="desc" required="required" [(ngModel)]="expense.description" name="description"  #description="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label for="amt">Expense Amount</label>
+          <input type="number" class="form-control" id="amt" required="required" [(ngModel)]="expense.amount" name="amount" #amount="ngModel">
+        </div>
+
+        <div class="form-group">
+          <label>Expense Date</label>
+          <input type="date" class="form-control" id="date" required="required" [ngModel]="expense.expenseDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="expense.expenseDate = $event" name="expenseDate" #date="ngModel">
+        </div>
+
+        <br><br>
+        <button type="submit" class="btn btn-success">Save</button>
+      </form>
+    </div>
+
+  </div>
+  <div class="container">
+    <h2>Total Expenses: {{getTotalExpense()}}</h2>
+    <div class="table-responsive-sm">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let expense of expenses">
+            <td>{{expense.type}}</td>
+            <td>{{expense.description}}</td>
+            <td>{{expense.amount}}</td>
+            <td>{{expense.expenseDate | date:'yyyy-MM-dd'}}</td>
+            <td><!--<button class="btn btn-danger" (click)="deleteExpense(expense)"> Delete</button>-->
+              <button class="btn btn-danger" (click)="updateExpense(expense)" style="margin-left: 20px;"> Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+
+</html>

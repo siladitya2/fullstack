@@ -1,0 +1,15 @@
+
+<H1>Welcome</H1>
+<div class="container">
+  welcome {{name}}.You can manage yout todos <a routerLink="/todos">here</a>
+</div>
+<div class="container">
+  Click here to get a customized welcome message
+  <button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
+
+</div>
+<div class="container">
+  Message from the Service<br>
+  {{welcomeMessageFromService}}
+
+</div>

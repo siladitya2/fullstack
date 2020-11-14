@@ -1,0 +1,51 @@
+<div class="container" style="margin-top: 10%;">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+
+      <div class="alert alert-warning" *ngIf="updateExpenseForm.dirty && updateExpenseForm.invalid">Enter Valid Input</div>
+      <div class="alert alert-warning" *ngIf="updateExpenseForm.dirty && description.invalid">Enter Valid Description at least 5 charchters</div>
+      <div class="alert alert-warning" *ngIf="updateExpenseForm.dirty && amount.invalid">Enter Valid Amount</div>
+      <div class="alert alert-warning" *ngIf="updateExpenseForm.dirty && date.invalid">Enter Valid Date</div>
+
+    <form (ngSubmit)="!updateExpenseForm.invalid && updateExpense(expense)" #updateExpenseForm="ngForm">
+        <div class="form-group">
+            <label for="type">Choose Type</label>
+        <select class="form-control" class="form-control" [(ngModel)]="expense.type" name="type">
+            <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+          </select>
+        </div>
+
+      <div class="form-group">
+        <label for="descrption">Description</label>
+        <input type="text" name="description" class="form-control"
+          [(ngModel)]="expense.description"
+          required="required"
+          minlength="5"
+          #description="ngModel">
+      </div>
+
+      <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" name="date" class="form-control"
+          [ngModel]="expense.expenseDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="expense.expenseDate = $event"
+          required="required"
+          #date="ngModel">
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number"
+             name="amount"
+              class="form-control"
+               required="required"
+              [(ngModel)]="expense.amount"
+              required="required"
+              #amount="ngModel">
+          </div>
+        <button type="submit" class="btn btn-success">Save</button>
+
+    </form>
+    </div>
+  </div>
+</div>

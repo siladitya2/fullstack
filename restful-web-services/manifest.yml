@@ -1,0 +1,11 @@
+applications:
+- name: adityarocks-app
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path: target/restful-web-services-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: adityarocks-app-interested-kookaburra.cfapps.io
+  services:
+  - adityarocks-app-database
+  stack: cflinuxfs3

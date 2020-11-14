@@ -1,0 +1,12 @@
+
+<h1>login!</h1>
+<div class="container-fluid">
+    <div class="alert alert-warning" *ngIf="isValidLogin">{{errorMessage}}</div>
+
+    <div>
+User Name: <input type="text" name="username" [(ngModel)]="userName">
+Password: <input type="password" name="password" [(ngModel)]="passWord">
+<button (click)="login()" class="btn btn-success">login</button>
+<!--<button (click)="handleJWTAuthentication()" class="btn btn-success">login</button>-->
+</div>
+</div>
